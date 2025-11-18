@@ -1,0 +1,925 @@
+// ============================================
+// SCRIPT DE CREACIÓN DE BASE DE DATOS MONGODB
+// Equivalente a electiva_3.sql
+// ============================================
+
+// Usar la base de datos
+use('electiva_3');
+
+// ============================================
+// 1. COLECCIÓN: roles
+// ============================================
+db.roles.insertMany([
+  {
+    _id: 1,
+    nombre_rol: 'Estudiante',
+    descripcion: 'Usuarios estudiantes de la universidad',
+    creado_en: new Date('2025-05-16T16:42:12Z')
+  },
+  {
+    _id: 2,
+    nombre_rol: 'Docente',
+    descripcion: 'Profesores y docentes de la universidad',
+    creado_en: new Date('2025-05-16T16:42:12Z')
+  },
+  {
+    _id: 3,
+    nombre_rol: 'Personal Administrativo',
+    descripcion: 'Personal administrativo no relacionado con seguridad',
+    creado_en: new Date('2025-05-16T16:42:12Z')
+  },
+  {
+    _id: 4,
+    nombre_rol: 'Celador',
+    descripcion: 'Personal encargado de la seguridad y control de acceso',
+    creado_en: new Date('2025-05-16T16:42:12Z')
+  },
+  {
+    _id: 5,
+    nombre_rol: 'Administrador',
+    descripcion: 'Administradores del sistema con todos los privilegios',
+    creado_en: new Date('2025-05-16T16:42:12Z')
+  }
+]);
+
+// Índices para roles
+db.roles.createIndex({ nombre_rol: 1 }, { unique: true });
+
+// ============================================
+// 2. COLECCIÓN: tipos_incidente
+// ============================================
+db.tipos_incidente.insertMany([
+  {
+    _id: 1,
+    nombre: 'Robo',
+    descripcion: 'Sustracción ilegal de pertenencias',
+    severidad: 'alta'
+  },
+  {
+    _id: 2,
+    nombre: 'Hurto',
+    descripcion: 'Sustracción sin violencia',
+    severidad: 'media'
+  },
+  {
+    _id: 3,
+    nombre: 'Objeto sospechoso',
+    descripcion: 'Objeto que genera sospechas de peligro',
+    severidad: 'critica'
+  },
+  {
+    _id: 4,
+    nombre: 'Comportamiento inusual',
+    descripcion: 'Conducta sospechosa de personas',
+    severidad: 'media'
+  },
+  {
+    _id: 5,
+    nombre: 'Emergencia médica',
+    descripcion: 'Situación que requiere atención médica',
+    severidad: 'alta'
+  },
+  {
+    _id: 6,
+    nombre: 'Daño a propiedad',
+    descripcion: 'Destrucción o daño a instalaciones',
+    severidad: 'media'
+  },
+  {
+    _id: 7,
+    nombre: 'Accidente',
+    descripcion: 'Incidente accidental',
+    severidad: 'baja'
+  },
+  {
+    _id: 9,
+    nombre: 'Otro',
+    descripcion: 'Actividad en la que se debe describir',
+    severidad: 'alta'
+  }
+]);
+
+// Índices para tipos_incidente
+db.tipos_incidente.createIndex({ nombre: 1 }, { unique: true });
+
+// ============================================
+// 3. COLECCIÓN: usuarios
+// ============================================
+db.usuarios.insertMany([
+  {
+    numero_documento: '1045667449',
+    tipo_documento: 'CC',
+    nombres: 'KAROL GIHAN',
+    apellidos: 'SALINAS GONZALEZ',
+    correo: 'karol@gmail.com',
+    contrasena: '86f2f4278dc1843c2d02dd70e2346440603e09f231aeb2f8a5bbaea7044852d1',
+    id_rol: 1,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: new Date('2025-09-14T20:07:21Z'),
+    creado_en: new Date('2025-05-17T20:29:05Z'),
+    actualizado_en: new Date('2025-09-15T01:07:21Z')
+  },
+  {
+    numero_documento: '1078456675',
+    tipo_documento: 'CC',
+    nombres: 'Andres',
+    apellidos: 'Martinez Palacios',
+    correo: 'andres@gmail.com',
+    contrasena: 'be99b09687f01286be192d2a91f900525abc632edcc17a81d84962a852dfdb3c',
+    id_rol: 4,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: new Date('2025-09-12T14:21:28Z'),
+    creado_en: new Date('2025-05-16T20:23:48Z'),
+    actualizado_en: new Date('2025-09-12T19:21:28Z')
+  },
+  {
+    numero_documento: '1078458140',
+    tipo_documento: 'CC',
+    nombres: 'Mercy',
+    apellidos: 'Perea Gutierrez',
+    correo: 'mercy@gmail.com',
+    contrasena: '613aba39d1baac9bbfd96a2f0baaeba2bc062633d72cc4ef526dff0f2920753a',
+    id_rol: 1,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: new Date('2025-06-03T15:09:38Z'),
+    creado_en: new Date('2025-06-02T16:37:32Z'),
+    actualizado_en: new Date('2025-06-03T20:09:38Z')
+  },
+  {
+    numero_documento: '1078458186',
+    tipo_documento: 'CC',
+    nombres: 'Gabriela',
+    apellidos: 'Cordoba Gonzalez',
+    correo: 'gabriela@gmail.com',
+    contrasena: 'f3eee7d35026cb68f540800bd59fa287ad3e4437b39b0c2ab1177382873ba5f2',
+    id_rol: 5,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: new Date('2025-09-14T20:08:25Z'),
+    creado_en: new Date('2025-05-16T20:01:41Z'),
+    actualizado_en: new Date('2025-09-15T01:08:25Z')
+  },
+  {
+    numero_documento: '1078458187',
+    tipo_documento: 'CC',
+    nombres: 'Marlen',
+    apellidos: 'Mena Mena',
+    correo: 'marlen@gmail.com',
+    contrasena: '009d5397cba7ca2222c68612e09c869e9c6200ec85fd34445df01ca1a36a9567',
+    id_rol: 2,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: new Date('2025-06-03T00:00:52Z'),
+    creado_en: new Date('2025-06-02T16:15:40Z'),
+    actualizado_en: new Date('2025-06-03T05:00:52Z')
+  },
+  {
+    numero_documento: '1078458745',
+    tipo_documento: 'CC',
+    nombres: 'Melissa',
+    apellidos: 'Ocampo Aguirre',
+    correo: 'melissa@gmail.com',
+    contrasena: 'b399e48b8f66eb21eb8baec7b77b3f8f3cd598259f2b11436bc6cdabe1156b05',
+    id_rol: 3,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: new Date('2025-06-03T03:39:36Z'),
+    creado_en: new Date('2025-06-03T02:17:54Z'),
+    actualizado_en: new Date('2025-06-03T08:39:36Z')
+  },
+  {
+    numero_documento: '123456789',
+    tipo_documento: 'CC',
+    nombres: 'Admin',
+    apellidos: 'Principal',
+    correo: 'admin@universidad.edu',
+    contrasena: '3b612c75a7b5048a435fb6ec81e52ff92d6d795a8b5a9c17070f6a63c97a53b2',
+    id_rol: 5,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: null,
+    creado_en: new Date('2025-05-16T16:42:13Z'),
+    actualizado_en: new Date('2025-05-16T16:42:13Z')
+  },
+  {
+    numero_documento: '1738946573',
+    tipo_documento: 'CC',
+    nombres: 'Mathias Carlos',
+    apellidos: 'Menendez Piedraita',
+    correo: 'mathias123@gmail.com',
+    contrasena: '018a98af2fd448949c0f8bed2cebd4a0c3406b95e17d317b662a1c240fbc0d6f',
+    id_rol: 3,
+    estado: 'activo',
+    intentos_fallidos: 0,
+    ultimo_acceso: new Date('2025-06-03T03:29:40Z'),
+    creado_en: new Date('2025-05-17T21:02:23Z'),
+    actualizado_en: new Date('2025-06-03T08:29:40Z')
+  }
+]);
+
+// Índices para usuarios
+db.usuarios.createIndex({ numero_documento: 1 }, { unique: true });
+db.usuarios.createIndex({ correo: 1 }, { unique: true });
+db.usuarios.createIndex({ id_rol: 1 });
+db.usuarios.createIndex({ estado: 1 });
+
+// ============================================
+// 4. COLECCIÓN: visitantes
+// ============================================
+db.visitantes.insertMany([
+  {
+    _id: 11,
+    tipo_documento: 'CC',
+    numero_documento: '1826354673',
+    nombres: 'Potter',
+    apellidos: 'Wisly',
+    motivo_visita: 'Proceso matricula',
+    contacto: '3264738454',
+    creado_en: new Date('2025-06-03T08:03:36Z')
+  }
+]);
+
+// Índices para visitantes
+db.visitantes.createIndex({ numero_documento: 1 });
+db.visitantes.createIndex({ tipo_documento: 1, numero_documento: 1 }, { unique: true });
+
+// ============================================
+// 5. COLECCIÓN: objetos_perdidos
+// ============================================
+db.objetos_perdidos.insertMany([
+  {
+    _id: 1,
+    numero_documento: '1045667449',
+    tipo_objeto: 'Calculadora',
+    descripcion: 'Se me perdió una calculadora color azul, es muy importante, la necesito para un parcial.',
+    ubicacion_perdida: 'Segundo piso, salón 801',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-05-17'),
+    fecha_reporte: new Date('2025-05-17T20:41:35Z'),
+    estado: 'perdido',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 5,
+    numero_documento: '1078458186',
+    tipo_objeto: 'Calculadora',
+    descripcion: 'Encontré esta calculadora ',
+    ubicacion_perdida: 'Segundo piso, salón 801',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-05-17'),
+    fecha_reporte: new Date('2025-05-17T21:13:51Z'),
+    estado: 'perdido',
+    tipo_reporte: 'hallazgo',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 6,
+    numero_documento: '1078458186',
+    tipo_objeto: 'Calculadora',
+    descripcion: 'Una verde',
+    ubicacion_perdida: 'calle',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-02'),
+    fecha_reporte: new Date('2025-06-02T15:40:14Z'),
+    estado: 'devuelto',
+    tipo_reporte: 'hallazgo',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 7,
+    numero_documento: '1078458140',
+    tipo_objeto: 'Cecular',
+    descripcion: 'Xiomi no 13',
+    ubicacion_perdida: 'Sala 1',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-02'),
+    fecha_reporte: new Date('2025-06-02T18:05:26Z'),
+    estado: 'devuelto',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 21,
+    numero_documento: '1078458186',
+    tipo_objeto: 'Chaqueta',
+    descripcion: 'nada',
+    ubicacion_perdida: '',
+    ubicacion: 'Cafeteria',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T09:38:48Z'),
+    estado: '',
+    tipo_reporte: 'perdida',
+    imagen_url: 'uploads/683ec2a82723c_1748943528.png',
+    numero_documento_reporta: null
+  },
+  {
+    _id: 22,
+    numero_documento: '1078458186',
+    tipo_objeto: 'camisa',
+    descripcion: 'camisa de rayas vieja',
+    ubicacion_perdida: '',
+    ubicacion: 'calle',
+    fecha_perdida: new Date('2025-06-02'),
+    fecha_reporte: new Date('2025-06-03T09:45:27Z'),
+    estado: '',
+    tipo_reporte: 'perdida',
+    imagen_url: 'uploads/683ec4379a8bd_1748943927.png',
+    numero_documento_reporta: null
+  },
+  {
+    _id: 23,
+    numero_documento: '1078458140',
+    tipo_objeto: 'Peluche',
+    descripcion: 'mia tiene atras',
+    ubicacion_perdida: 'salon',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T16:45:55Z'),
+    estado: '',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 24,
+    numero_documento: '1045667449',
+    tipo_objeto: 'Lapicero',
+    descripcion: 'Lapicero que tiene nombre de Maria al lado',
+    ubicacion_perdida: 'Auditorio ',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T19:01:00Z'),
+    estado: '',
+    tipo_reporte: 'hallazgo',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 25,
+    numero_documento: '1045667449',
+    tipo_objeto: 'Lapicero',
+    descripcion: 'Lapicero que tiene nombre de Maria al lado',
+    ubicacion_perdida: 'Auditorio ',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T19:01:05Z'),
+    estado: '',
+    tipo_reporte: 'hallazgo',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 26,
+    numero_documento: '1045667449',
+    tipo_objeto: 'lapicero',
+    descripcion: 'lapicero',
+    ubicacion_perdida: 'salon',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T19:04:00Z'),
+    estado: 'perdido',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 27,
+    numero_documento: '1045667449',
+    tipo_objeto: 'casa',
+    descripcion: 'casa',
+    ubicacion_perdida: 'casa',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T19:04:48Z'),
+    estado: '',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 28,
+    numero_documento: '1045667449',
+    tipo_objeto: 'sombrilla',
+    descripcion: 'sombrilla',
+    ubicacion_perdida: 'entrada',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T19:09:40Z'),
+    estado: '',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 29,
+    numero_documento: '1078458186',
+    tipo_objeto: 'skjsakjskja',
+    descripcion: 'kjsakjskajksa',
+    ubicacion_perdida: 'sakjsakjsak',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T19:46:55Z'),
+    estado: '',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 30,
+    numero_documento: '1078458186',
+    tipo_objeto: 'l,lkllklk',
+    descripcion: 'ukkkjkj',
+    ubicacion_perdida: 'lklkl',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T19:51:56Z'),
+    estado: '',
+    tipo_reporte: 'perdida',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 31,
+    numero_documento: '1045667449',
+    tipo_objeto: 'chaqueta',
+    descripcion: 'nada',
+    ubicacion_perdida: 'Sala 1',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T20:05:30Z'),
+    estado: '',
+    tipo_reporte: 'hallazgo',
+    imagen_url: null,
+    numero_documento_reporta: null
+  },
+  {
+    _id: 32,
+    numero_documento: '1078458186',
+    tipo_objeto: 'Calculadora',
+    descripcion: 'cisa',
+    ubicacion_perdida: 'sala',
+    ubicacion: '',
+    fecha_perdida: new Date('2025-06-03'),
+    fecha_reporte: new Date('2025-06-03T20:07:09Z'),
+    estado: '',
+    tipo_reporte: 'hallazgo',
+    imagen_url: null,
+    numero_documento_reporta: null
+  }
+]);
+
+// Índices para objetos_perdidos
+db.objetos_perdidos.createIndex({ numero_documento: 1 });
+db.objetos_perdidos.createIndex({ estado: 1 });
+db.objetos_perdidos.createIndex({ tipo_reporte: 1 });
+db.objetos_perdidos.createIndex({ fecha_reporte: -1 });
+
+// ============================================
+// 6. COLECCIÓN: imagenes_objeto
+// ============================================
+db.imagenes_objeto.insertMany([
+  {
+    _id: 1,
+    id_objeto: 23,
+    tipo_archivo: 'image/jpeg',
+    nombre_archivo: '683e9f4939e7f_objeto_transicional.jpg',
+    ruta_archivo: 'uploads/objetos/683f26c3219cf.jpg',
+    subido_en: new Date('2025-06-03T16:45:55Z')
+  },
+  {
+    _id: 2,
+    id_objeto: 27,
+    tipo_archivo: 'image/jpeg',
+    nombre_archivo: '683e9f4939e7f_objeto_transicional.jpg',
+    ruta_archivo: 'uploads/objetos/683f475026c4e.jpg',
+    subido_en: new Date('2025-06-03T19:04:48Z')
+  },
+  {
+    _id: 3,
+    id_objeto: 28,
+    tipo_archivo: 'image/jpeg',
+    nombre_archivo: 'sombrilla.jpg',
+    ruta_archivo: 'uploads/objetos/683f48741e5ff.jpg',
+    subido_en: new Date('2025-06-03T19:09:40Z')
+  },
+  {
+    _id: 4,
+    id_objeto: 31,
+    tipo_archivo: 'image/jpeg',
+    nombre_archivo: '683e9f4939e7f_objeto_transicional.jpg',
+    ruta_archivo: 'uploads/objetos/683f558a60f1a.jpg',
+    subido_en: new Date('2025-06-03T20:05:30Z')
+  }
+]);
+
+// Índices para imagenes_objeto
+db.imagenes_objeto.createIndex({ id_objeto: 1 });
+
+// ============================================
+// 7. COLECCIÓN: reportes_incidente
+// ============================================
+db.reportes_incidente.insertMany([
+  {
+    _id: 1,
+    numero_documento: '1078458186',
+    id_tipo: 7,
+    descripcion: 'en moro',
+    ubicacion: 'calle',
+    fecha_incidente: new Date('2025-05-30T15:03:00Z'),
+    fecha_reporte: new Date('2025-05-30T13:03:43Z'),
+    estado: 'reportado'
+  },
+  {
+    _id: 2,
+    numero_documento: '1078458186',
+    id_tipo: 4,
+    descripcion: 'Nada no se',
+    ubicacion: 'calle',
+    fecha_incidente: new Date('2025-06-03T09:07:00Z'),
+    fecha_reporte: new Date('2025-06-03T07:07:53Z'),
+    estado: 'reportado'
+  },
+  {
+    _id: 4,
+    numero_documento: '1045667449',
+    id_tipo: 7,
+    descripcion: 'cicla',
+    ubicacion: 'me cai',
+    fecha_incidente: new Date('2025-06-03T21:25:00Z'),
+    fecha_reporte: new Date('2025-06-03T19:26:27Z'),
+    estado: 'reportado'
+  }
+]);
+
+// Índices para reportes_incidente
+db.reportes_incidente.createIndex({ numero_documento: 1 });
+db.reportes_incidente.createIndex({ id_tipo: 1 });
+db.reportes_incidente.createIndex({ estado: 1 });
+db.reportes_incidente.createIndex({ fecha_reporte: -1 });
+
+// ============================================
+// 8. COLECCIÓN: evidencias_incidente
+// ============================================
+db.evidencias_incidente.insertMany([
+  {
+    _id: 1,
+    id_reporte: 2,
+    tipo_archivo: 'jpg',
+    nombre_archivo: 'objeto-transicional.jpg',
+    ruta_archivo: 'uploads/evidencias/683e9f4939e7f_objeto_transicional.jpg',
+    subido_en: new Date('2025-06-03T07:07:53Z')
+  },
+  {
+    _id: 2,
+    id_reporte: 4,
+    tipo_archivo: 'jpg',
+    nombre_archivo: '683e9f4939e7f_objeto_transicional.jpg',
+    ruta_archivo: 'uploads/evidencias/683f4c63d5815_683e9f4939e7f_objeto_transicional.jpg',
+    subido_en: new Date('2025-06-03T19:26:27Z')
+  }
+]);
+
+// Índices para evidencias_incidente
+db.evidencias_incidente.createIndex({ id_reporte: 1 });
+
+// ============================================
+// 9. COLECCIÓN: registros_acceso
+// ============================================
+db.registros_acceso.insertMany([
+  {
+    _id: 1,
+    numero_documento: '1078458186',
+    id_visitante: null,
+    placa_vehiculo: null,
+    tipo_movimiento: 'entrada',
+    fecha_hora: new Date('2025-05-30T02:55:51Z'),
+    registrado_por: '1078458186',
+    observaciones: 'ninguna'
+  },
+  {
+    _id: 2,
+    numero_documento: '1045667449',
+    id_visitante: null,
+    placa_vehiculo: null,
+    tipo_movimiento: 'entrada',
+    fecha_hora: new Date('2025-05-30T08:26:20Z'),
+    registrado_por: '1078458186',
+    observaciones: 'Va a entregar un cuaderno'
+  },
+  {
+    _id: 3,
+    numero_documento: null,
+    id_visitante: 11,
+    placa_vehiculo: null,
+    tipo_movimiento: 'entrada',
+    fecha_hora: new Date('2025-06-03T03:03:36Z'),
+    registrado_por: '1078456675',
+    observaciones: 'Nada'
+  }
+]);
+
+// Índices para registros_acceso
+db.registros_acceso.createIndex({ numero_documento: 1 });
+db.registros_acceso.createIndex({ id_visitante: 1 });
+db.registros_acceso.createIndex({ registrado_por: 1 });
+db.registros_acceso.createIndex({ fecha_hora: -1 });
+db.registros_acceso.createIndex({ tipo_movimiento: 1 });
+
+// ============================================
+// 10. COLECCIÓN: aprobaciones_reportes
+// ============================================
+// Esta colección se crea vacía inicialmente, se llena cuando se crean reportes
+db.aprobaciones_reportes.createIndex({ id_reporte: 1 });
+db.aprobaciones_reportes.createIndex({ id_objeto: 1 });
+db.aprobaciones_reportes.createIndex({ aprobado_por: 1 });
+
+// ============================================
+// 11. COLECCIÓN: notificaciones
+// ============================================
+// Insertar algunas notificaciones de ejemplo (las más recientes)
+db.notificaciones.insertMany([
+  {
+    _id: 239,
+    numero_documento: '1045667449',
+    titulo: 'Nuevo objeto hallazgo reportado (#32)',
+    mensaje: 'Tipo: Calculadora, Ubicación: sala',
+    tipo: 'objeto',
+    id_referencia: 32,
+    leida: 0,
+    fecha_hora: new Date('2025-06-03T20:07:09Z')
+  },
+  {
+    _id: 247,
+    numero_documento: '1078458186',
+    titulo: 'Nuevo mensaje sobre objeto (#5)',
+    mensaje: 'Tienes un nuevo mensaje sobre tu objeto reportado: El usuario   está interesado en reclamar este obje...',
+    tipo: 'objeto',
+    id_referencia: 5,
+    leida: 0,
+    fecha_hora: new Date('2025-06-03T20:08:28Z')
+  },
+  {
+    _id: 248,
+    numero_documento: '1078458186',
+    titulo: 'Reclamación de objeto',
+    mensaje: 'El usuario   está interesado en reclamar este objeto. Por favor contacta con él para verificar la propiedad.',
+    tipo: 'objeto',
+    id_referencia: 5,
+    leida: 0,
+    fecha_hora: new Date('2025-06-03T20:08:28Z')
+  },
+  {
+    _id: 249,
+    numero_documento: '1078458186',
+    titulo: 'Nuevo mensaje sobre objeto (#5)',
+    mensaje: 'Tienes un nuevo mensaje sobre tu objeto reportado: es mio...',
+    tipo: 'objeto',
+    id_referencia: 5,
+    leida: 0,
+    fecha_hora: new Date('2025-06-03T20:08:41Z')
+  }
+]);
+
+// Índices para notificaciones
+db.notificaciones.createIndex({ numero_documento: 1 });
+db.notificaciones.createIndex({ leida: 1 });
+db.notificaciones.createIndex({ fecha_hora: -1 });
+db.notificaciones.createIndex({ tipo: 1, id_referencia: 1 });
+
+// ============================================
+// 12. COLECCIÓN: mensajes_objetos
+// ============================================
+db.mensajes_objetos.insertMany([
+  {
+    _id: 1,
+    id_objeto: 5,
+    numero_documento: '1078458186',
+    mensaje: 'Creo haber visto una parecida en el primer piso',
+    fecha_hora: new Date('2025-06-02T15:39:20Z')
+  },
+  {
+    _id: 2,
+    id_objeto: 5,
+    numero_documento: '1078458140',
+    mensaje: 'El usuario   está interesado en reclamar este objeto. Por favor contacta con él para verificar la propiedad.',
+    fecha_hora: new Date('2025-06-02T17:57:55Z')
+  },
+  {
+    _id: 3,
+    id_objeto: 5,
+    numero_documento: '1078458140',
+    mensaje: 'Detras esta llena de figuritas ',
+    fecha_hora: new Date('2025-06-02T17:59:00Z')
+  },
+  {
+    _id: 4,
+    id_objeto: 5,
+    numero_documento: '1045667449',
+    mensaje: 'El usuario   está interesado en reclamar este objeto. Por favor contacta con él para verificar la propiedad.',
+    fecha_hora: new Date('2025-06-03T20:08:28Z')
+  },
+  {
+    _id: 5,
+    id_objeto: 5,
+    numero_documento: '1045667449',
+    mensaje: 'es mio',
+    fecha_hora: new Date('2025-06-03T20:08:41Z')
+  }
+]);
+
+// Índices para mensajes_objetos
+db.mensajes_objetos.createIndex({ id_objeto: 1 });
+db.mensajes_objetos.createIndex({ numero_documento: 1 });
+db.mensajes_objetos.createIndex({ fecha_hora: -1 });
+
+// ============================================
+// 13. COLECCIÓN: comentarios_objetos
+// ============================================
+// Colección vacía inicialmente
+db.comentarios_objetos.createIndex({ id_objeto: 1 });
+db.comentarios_objetos.createIndex({ numero_documento: 1 });
+db.comentarios_objetos.createIndex({ fecha_hora: -1 });
+
+// ============================================
+// 14. COLECCIÓN: respuestas_incidentes
+// ============================================
+// Colección vacía inicialmente
+db.respuestas_incidentes.createIndex({ id_reporte: 1 });
+db.respuestas_incidentes.createIndex({ numero_documento: 1 });
+db.respuestas_incidentes.createIndex({ fecha_hora: -1 });
+
+// ============================================
+// 15. COLECCIÓN: vehiculos
+// ============================================
+// Colección vacía inicialmente
+db.vehiculos.createIndex({ numero_documento: 1 });
+db.vehiculos.createIndex({ placa: 1 }, { unique: true });
+
+// ============================================
+// 16. COLECCIÓN: registros_vehiculos
+// ============================================
+// Colección vacía inicialmente
+db.registros_vehiculos.createIndex({ id_vehiculo: 1 });
+db.registros_vehiculos.createIndex({ registrado_por: 1 });
+db.registros_vehiculos.createIndex({ fecha_hora: -1 });
+
+// ============================================
+// 17. COLECCIÓN: auditoria
+// ============================================
+// Insertar algunos registros de auditoría importantes
+db.auditoria.insertMany([
+  {
+    _id: 244,
+    numero_documento: '1078458186',
+    accion: 'Inicio de sesión exitoso',
+    tabla_afectada: 'usuarios',
+    id_registro_afectado: null,
+    datos_anteriores: null,
+    datos_nuevos: null,
+    fecha_hora: new Date('2025-09-15T01:08:25Z'),
+    ip_origen: null
+  },
+  {
+    _id: 243,
+    numero_documento: '1045667449',
+    accion: 'Inicio de sesión exitoso',
+    tabla_afectada: 'usuarios',
+    id_registro_afectado: null,
+    datos_anteriores: null,
+    datos_nuevos: null,
+    fecha_hora: new Date('2025-09-15T01:07:21Z'),
+    ip_origen: null
+  }
+]);
+
+// Índices para auditoria
+db.auditoria.createIndex({ numero_documento: 1 });
+db.auditoria.createIndex({ tabla_afectada: 1 });
+db.auditoria.createIndex({ fecha_hora: -1 });
+db.auditoria.createIndex({ accion: 1 });
+
+// ============================================
+// FUNCIONES DE VALIDACIÓN (Equivalente a Stored Procedures)
+// ============================================
+// Nota: MongoDB no tiene stored procedures, pero puedes crear funciones JavaScript
+// que se pueden ejecutar en el servidor. Aquí están las funciones equivalentes:
+
+// Función para autenticar usuario
+db.system.js.save({
+  _id: "sp_autenticar_usuario",
+  value: function(numero_documento, contrasena) {
+    var usuario = db.usuarios.findOne({ numero_documento: numero_documento });
+    
+    if (!usuario) {
+      return { resultado: false, mensaje: 'Usuario no encontrado' };
+    }
+    
+    if (usuario.estado === 'bloqueado') {
+      return { resultado: false, mensaje: 'Usuario bloqueado. Contacte al administrador.' };
+    }
+    
+    if (usuario.estado === 'inactivo') {
+      return { resultado: false, mensaje: 'Usuario inactivo. Contacte al administrador.' };
+    }
+    
+    // Verificar contraseña (SHA256)
+    var crypto = require('crypto');
+    var hash = crypto.createHash('sha256').update(contrasena).digest('hex');
+    
+    if (usuario.contrasena === hash) {
+      // Actualizar intentos y último acceso
+      db.usuarios.updateOne(
+        { numero_documento: numero_documento },
+        { 
+          $set: { 
+            intentos_fallidos: 0,
+            ultimo_acceso: new Date()
+          }
+        }
+      );
+      
+      // Registrar en auditoría
+      db.auditoria.insertOne({
+        numero_documento: numero_documento,
+        accion: 'Inicio de sesión exitoso',
+        tabla_afectada: 'usuarios',
+        fecha_hora: new Date()
+      });
+      
+      var rol = db.roles.findOne({ _id: usuario.id_rol });
+      
+      return {
+        resultado: true,
+        mensaje: 'Autenticación exitosa',
+        id_rol: usuario.id_rol,
+        nombre_completo: usuario.nombres + ' ' + usuario.apellidos
+      };
+    } else {
+      // Incrementar intentos fallidos
+      var nuevos_intentos = usuario.intentos_fallidos + 1;
+      var update = { $inc: { intentos_fallidos: 1 } };
+      
+      if (nuevos_intentos >= 3) {
+        update.$set = { estado: 'bloqueado' };
+      }
+      
+      db.usuarios.updateOne(
+        { numero_documento: numero_documento },
+        update
+      );
+      
+      // Registrar en auditoría
+      db.auditoria.insertOne({
+        numero_documento: numero_documento,
+        accion: nuevos_intentos >= 3 ? 
+          'Usuario bloqueado por intentos fallidos' : 
+          'Intento de inicio de sesión fallido',
+        tabla_afectada: 'usuarios',
+        fecha_hora: new Date()
+      });
+      
+      return {
+        resultado: false,
+        mensaje: nuevos_intentos >= 3 ? 
+          'Usuario bloqueado por múltiples intentos fallidos. Contacte al administrador.' :
+          'Credenciales incorrectas'
+      };
+    }
+  }
+});
+
+print("============================================");
+print("BASE DE DATOS MONGODB CREADA EXITOSAMENTE");
+print("============================================");
+print("Colecciones creadas:");
+print("- roles");
+print("- tipos_incidente");
+print("- usuarios");
+print("- visitantes");
+print("- objetos_perdidos");
+print("- imagenes_objeto");
+print("- reportes_incidente");
+print("- evidencias_incidente");
+print("- registros_acceso");
+print("- aprobaciones_reportes");
+print("- notificaciones");
+print("- mensajes_objetos");
+print("- comentarios_objetos");
+print("- respuestas_incidentes");
+print("- vehiculos");
+print("- registros_vehiculos");
+print("- auditoria");
+print("============================================");
+print("NOTA: Los stored procedures de MySQL deben");
+print("implementarse como funciones de aplicación");
+print("o funciones JavaScript en MongoDB.");
+print("============================================");
+
